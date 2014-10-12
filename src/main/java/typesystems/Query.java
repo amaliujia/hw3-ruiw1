@@ -1,6 +1,6 @@
 
 
-/* First created by JCasGen Sun Oct 12 15:33:24 EDT 2014 */
+/* First created by JCasGen Sun Oct 12 16:07:38 EDT 2014 */
 package typesystems;
 
 import org.apache.uima.jcas.JCas; 
@@ -14,12 +14,12 @@ import org.apache.uima.jcas.tcas.Annotation;
  * Updated by JCasGen Sun Oct 12 16:07:38 EDT 2014
  * XML source: /Users/amaliujia/Documents/workspace/hw3-ruiw1/src/main/resources/descriptors/typesystems/VectorSpaceTypes.xml
  * @generated */
-public class Token extends Annotation {
+public class Query extends Annotation {
   /** @generated
    * @ordered 
    */
   @SuppressWarnings ("hiding")
-  public final static int typeIndexID = JCasRegistry.register(Token.class);
+  public final static int typeIndexID = JCasRegistry.register(Query.class);
   /** @generated
    * @ordered 
    */
@@ -33,14 +33,14 @@ public class Token extends Annotation {
  
   /** Never called.  Disable default constructor
    * @generated */
-  protected Token() {/* intentionally empty block */}
+  protected Query() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
    * @generated
    * @param addr low level Feature Structure reference
    * @param type the type of this Feature Structure 
    */
-  public Token(int addr, TOP_Type type) {
+  public Query(int addr, TOP_Type type) {
     super(addr, type);
     readObject();
   }
@@ -48,7 +48,7 @@ public class Token extends Annotation {
   /** @generated
    * @param jcas JCas to which this Feature Structure belongs 
    */
-  public Token(JCas jcas) {
+  public Query(JCas jcas) {
     super(jcas);
     readObject();   
   } 
@@ -58,7 +58,7 @@ public class Token extends Annotation {
    * @param begin offset to the begin spot in the SofA
    * @param end offset to the end spot in the SofA 
   */  
-  public Token(JCas jcas, int begin, int end) {
+  public Query(JCas jcas, int begin, int end) {
     super(jcas);
     setBegin(begin);
     setEnd(end);
@@ -77,6 +77,28 @@ public class Token extends Annotation {
  
     
   //*--------------*
+  //* Feature: queryID
+
+  /** getter for queryID - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public String getQueryID() {
+    if (Query_Type.featOkTst && ((Query_Type)jcasType).casFeat_queryID == null)
+      jcasType.jcas.throwFeatMissing("queryID", "typesystems.Query");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((Query_Type)jcasType).casFeatCode_queryID);}
+    
+  /** setter for queryID - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setQueryID(String v) {
+    if (Query_Type.featOkTst && ((Query_Type)jcasType).casFeat_queryID == null)
+      jcasType.jcas.throwFeatMissing("queryID", "typesystems.Query");
+    jcasType.ll_cas.ll_setStringValue(addr, ((Query_Type)jcasType).casFeatCode_queryID, v);}    
+   
+    
+  //*--------------*
   //* Feature: text
 
   /** getter for text - gets 
@@ -84,40 +106,18 @@ public class Token extends Annotation {
    * @return value of the feature 
    */
   public String getText() {
-    if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_text == null)
-      jcasType.jcas.throwFeatMissing("text", "typesystems.Token");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((Token_Type)jcasType).casFeatCode_text);}
+    if (Query_Type.featOkTst && ((Query_Type)jcasType).casFeat_text == null)
+      jcasType.jcas.throwFeatMissing("text", "typesystems.Query");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((Query_Type)jcasType).casFeatCode_text);}
     
   /** setter for text - sets  
    * @generated
    * @param v value to set into the feature 
    */
   public void setText(String v) {
-    if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_text == null)
-      jcasType.jcas.throwFeatMissing("text", "typesystems.Token");
-    jcasType.ll_cas.ll_setStringValue(addr, ((Token_Type)jcasType).casFeatCode_text, v);}    
-   
-    
-  //*--------------*
-  //* Feature: frequency
-
-  /** getter for frequency - gets 
-   * @generated
-   * @return value of the feature 
-   */
-  public int getFrequency() {
-    if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_frequency == null)
-      jcasType.jcas.throwFeatMissing("frequency", "typesystems.Token");
-    return jcasType.ll_cas.ll_getIntValue(addr, ((Token_Type)jcasType).casFeatCode_frequency);}
-    
-  /** setter for frequency - sets  
-   * @generated
-   * @param v value to set into the feature 
-   */
-  public void setFrequency(int v) {
-    if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_frequency == null)
-      jcasType.jcas.throwFeatMissing("frequency", "typesystems.Token");
-    jcasType.ll_cas.ll_setIntValue(addr, ((Token_Type)jcasType).casFeatCode_frequency, v);}    
+    if (Query_Type.featOkTst && ((Query_Type)jcasType).casFeat_text == null)
+      jcasType.jcas.throwFeatMissing("text", "typesystems.Query");
+    jcasType.ll_cas.ll_setStringValue(addr, ((Query_Type)jcasType).casFeatCode_text, v);}    
   }
 
     

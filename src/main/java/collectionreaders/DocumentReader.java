@@ -4,17 +4,19 @@ package collectionreaders;
 
 import java.util.ArrayList;
 
+import javax.management.Query;
+
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 
 import typesystems.Document;
+//import typesystems.Query;
 
 
-public class DocumentReader 
-extends JCasAnnotator_ImplBase  {
+public class DocumentReader extends JCasAnnotator_ImplBase  {
 	
-	@Override
+
 	public void process(JCas jcas) 
 			throws AnalysisEngineProcessException {
 		
@@ -33,7 +35,7 @@ extends JCasAnnotator_ImplBase  {
 		int rel = Integer.parseInt(docInfo.get(0));
 		int qid = Integer.parseInt(docInfo.get(1));
 		String txt = docInfo.get(2);
-		
+
 		Document doc = new Document(jcas);
 		doc.setText(txt);
 		doc.setQueryID(qid);
