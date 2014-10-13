@@ -8,8 +8,22 @@
     <description/>
     <version>1.0</version>
     <vendor/>
-    <configurationParameters/>
-    <configurationParameterSettings/>
+    <configurationParameters>
+      <configurationParameter>
+        <name>stopwords</name>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>stopwords</name>
+        <value>
+          <string>src/main/resources/stopwords.txt</string>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
     <typeSystemDescription>
       <imports>
 		<import location="../typesystems/VectorSpaceTypes.xml"/>

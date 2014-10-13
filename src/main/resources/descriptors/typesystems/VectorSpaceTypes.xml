@@ -29,7 +29,7 @@
           <name>tokenList</name>
           <description/>
           <rangeTypeName>uima.cas.FSList</rangeTypeName>
-          <elementType>edu.cmu.vector_space.typesystems.Token</elementType>
+          <elementType>typesystems.Token</elementType>
         </featureDescription>
       </features>
     </typeDescription>

@@ -70,7 +70,6 @@ public class Utils {
 				head.setTail(new EmptyFSList(aJCas));
 			}
 		}
-
 		return list;
 	}
 

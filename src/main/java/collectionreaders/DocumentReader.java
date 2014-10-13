@@ -19,14 +19,14 @@ public class DocumentReader extends JCasAnnotator_ImplBase  {
 
 	public void process(JCas jcas) 
 			throws AnalysisEngineProcessException {
-		
+	 // System.out.println("Reader");
 		// reading sentence from the CAS 
 		String sLine = jcas.getDocumentText();
 
 		// TODO: make sure information from text collection are extracted correctly
 		ArrayList<String> docInfo = parseDataLine(sLine);
 		
-		//This is to make sure that parsing done properly and 
+		//This is to make sure tat parsing done properly and 
 		//minimal data for rel,qid,text are available to proceed 
 		if(docInfo.size()<3){
 			System.err.println("Not enough information in the line");
@@ -35,7 +35,6 @@ public class DocumentReader extends JCasAnnotator_ImplBase  {
 		int rel = Integer.parseInt(docInfo.get(0));
 		int qid = Integer.parseInt(docInfo.get(1));
 		String txt = docInfo.get(2);
-
 		Document doc = new Document(jcas);
 		doc.setText(txt);
 		doc.setQueryID(qid);
