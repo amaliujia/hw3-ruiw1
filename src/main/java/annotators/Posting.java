@@ -10,13 +10,19 @@ import typesystems.Document;
  *
  */
 public class Posting implements Comparable<Posting>{
-  private int id;
-  private double score;
-  private Document doc;
+  public int id;
+  public double score;
+  public Document doc;
  
+  public Posting(int ID, double aScore, Document aDoc){
+    this.id = ID;
+    this.score = aScore;
+    this.doc = aDoc;
+  }
+  
   public int compareTo(Posting o) {
     if(this.score == o.score) return 0;
-    else if(this.score < o.score) return -1;
-    else return 1;
+    else if(this.score < o.score) return 1;
+    else return -1;
   } 
 }

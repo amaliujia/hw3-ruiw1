@@ -2,12 +2,15 @@ package casconsumers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
 import javax.management.Query;
+import javax.swing.text.Position;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
@@ -19,6 +22,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.ProcessTrace;
 
+import annotators.Posting;
 import typesystems.Document;
 import typesystems.Token;
 
@@ -38,6 +42,8 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	public HashMap<Integer, Document> queryHashMap;
 	
 	public HashMap<Integer, ArrayList> rankMap;
+	
+	public ArrayList<Double> MR;
 		
 	public void initialize() throws ResourceInitializationException {
 
@@ -47,6 +53,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		similarityList = new ArrayList<Double>();
 		queryHashMap = new HashMap<Integer, Document>();
 		rankMap = new HashMap<Integer, ArrayList>();
+		MR = new ArrayList<Double>();
 	}
 
 	/**
@@ -121,9 +128,19 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		Iterator it = queryHashMap.keySet().iterator();
 		while(it.hasNext()){
 		  int id = (Integer) it.next();
-		  ArrayList<Document> rankList = new ArrayList<Document>();
-		  //ArrayList<Double> sourt
-		  //for(int i = 0; i < )
+		  ArrayList<Posting> rankList = new ArrayList<Posting>();
+		  for(int i = 0; i < qIdList.size(); i++){
+		    if((qIdList.get(i) == id) && (relList.get(i) != 99)){
+		      rankList.add(new Posting(id, similarityList.get(i), docList.get(i)));
+		    }
+		  }
+		  Collections.sort(rankList);
+		  for(int j = 0; j < rankList.size(); j++){
+		    if(rankList.get(j).doc.getRelevanceValue() == 1){
+		      MR.add(((double)1 / (j + 1)));
+		      break;
+		    }
+		  }
 		}
 		
 		
