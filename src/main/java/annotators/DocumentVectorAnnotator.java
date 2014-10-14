@@ -58,7 +58,8 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 		if (iter.isValid()) {
 			iter.moveToNext();
 			Document doc = (Document) iter.get();
-			//createTermFreqVector(jcas, doc);
+			createTermFreqVector(jcas, doc);
+		  jcas.addFsToIndexes(doc);
 		}
 	}
 	/**
