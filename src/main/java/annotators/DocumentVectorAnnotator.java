@@ -75,17 +75,15 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 		String[] tokens = docText.split(" ");
 		ArrayList<Token> tempList = new ArrayList<Token>();//(ArrayList<Token>)JCasUtil.select(doc.getTokenList(), Token.class);
 		for(int i = 0; i < tokens.length; i++){
-//		  if(stopwords.contains(tokens[i])){
-//		    continue;
-//		  }
-		  try {
-        String c[] = tokenizeQuery(tokens[i]);
-        tokens[i] = c[0];
-      } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
+//		  try {
+//        String c[] = tokenizeQuery(tokens[i]);
+//        tokens[i] = c[0];
+//      } catch (IOException e) {
+//        // TODO Auto-generated catch block
+//        e.printStackTrace();
+//      }
 		  
+		  //set token list
 		  for(int j = 0; j < tempList.size(); j++){
 		    if(tempList.get(j).getText().equals(tokens[j])){
 		       int tf = tempList.get(j).getFrequency();
@@ -102,6 +100,14 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 	  doc.setTokenList(utils.Utils.fromCollectionToFSList(jcas, tempList));
 	}
 	
+	/**
+	 * Use to remove stopwords and do stemming
+	 * @param query
+	 *       the word need to deal with.
+	 * @return
+	 *       The cleaner word
+	 * @throws IOException
+	 */
   public String[] tokenizeQuery(String query) throws IOException {
 
     TokenStreamComponents comp = analyzer.createComponents("dummy", new StringReader(query));

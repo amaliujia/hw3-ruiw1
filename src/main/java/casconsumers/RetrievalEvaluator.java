@@ -34,17 +34,19 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	public ArrayList<Document> docList;
 	
 	public ArrayList<Double> similarityList;
+	
+	public HashMap<Integer, Document> queryHashMap;
+	
+	public HashMap<Integer, ArrayList> rankMap;
 		
 	public void initialize() throws ResourceInitializationException {
 
 		qIdList = new ArrayList<Integer>();
-
 		relList = new ArrayList<Integer>();
-		
 		docList = new ArrayList<Document>();
-		
 		similarityList = new ArrayList<Double>();
-
+		queryHashMap = new HashMap<Integer, Document>();
+		rankMap = new HashMap<Integer, ArrayList>();
 	}
 
 	/**
@@ -72,17 +74,22 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
 			qIdList.add(doc.getQueryID());
 			relList.add(doc.getRelevanceValue());
-
-			//Do something useful here
 	    docList.add(doc);
-	    if(doc.getRelevanceValue() == 99){
+
+	     //compute cosine similarities here
+	    if(doc.getRelevanceValue() == 99){// if it is query, no need to save similarity
+	      queryHashMap.put(doc.getQueryID(), doc);
 	      similarityList.add(0.0);
-	    }else{
-	      for(int j = relList.size() - 1; j >= 0; j--){
-	        if(relList.get(j) == 99){
-	          break;
+	    }else{// if it is a doc, then use a sort of cosine similarity formula
+	        Document queryDoc = queryHashMap.get(doc.getQueryID());
+	        if(queryDoc == null){
+	          try {
+              throw new Exception();
+            } catch (Exception e) {
+              System.out.println("Query lost!!!");
+              e.printStackTrace();
+            }
 	        }
-	        Document queryDoc = docList.get(j);
 	        HashMap<String, Integer> queryVector = new HashMap<String, Integer>();
 	        HashMap<String, Integer> docVector = new HashMap<String, Integer>();
 	        
@@ -99,24 +106,25 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	      }
 	    }
 		}
-	}
 
 	/**
 	 * Compute Cosine Similarity and rank the retrieved sentences 2.
 	 * Compute the MRR metric
 	 */
-	@Override
 	public void collectionProcessComplete(ProcessTrace arg0)
 			throws ResourceProcessException, IOException {
 
 		super.collectionProcessComplete(arg0);
-
-		// TODO :: compute the cosine similarity measure
 		
-		
-		
-		// TODO :: compute the rank of retrieved sentences
-		
+		// compute the rank of retrieved sentences
+		// the real wrok is to sort
+		Iterator it = queryHashMap.keySet().iterator();
+		while(it.hasNext()){
+		  int id = (Integer) it.next();
+		  ArrayList<Document> rankList = new ArrayList<Document>();
+		  //ArrayList<Double> sourt
+		  //for(int i = 0; i < )
+		}
 		
 		
 		// TODO :: compute the metric:: mean reciprocal rank
@@ -146,6 +154,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		  String key = it.next();
 		  docNorm += (Math.pow(docVector.get(key), 2));
 		}
+		// the most naive way to implement cosine similarities
 		cosine_similarity = cosine_similarity / (Math.sqrt(queryNorm) * Math.sqrt(docNorm));
 
 		return cosine_similarity;

@@ -23,7 +23,7 @@ public class DocumentReader extends JCasAnnotator_ImplBase  {
 		// reading sentence from the CAS 
 		String sLine = jcas.getDocumentText();
 
-		// TODO: make sure information from text collection are extracted correctly
+		//make sure information from text collection are extracted correctly
 		ArrayList<String> docInfo = parseDataLine(sLine);
 		
 		//This is to make sure tat parsing done properly and 
