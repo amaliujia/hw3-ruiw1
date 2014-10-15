@@ -15,12 +15,24 @@
         <multiValued>false</multiValued>
         <mandatory>false</mandatory>
       </configurationParameter>
+    <configurationParameter>
+        <name>errorAnalysis</name>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
     </configurationParameters>
     <configurationParameterSettings>
       <nameValuePair>
         <name>report</name>
         <value>
           <string>report.txt</string>
+        </value>
+      </nameValuePair>
+    <nameValuePair>
+        <name>errorAnalysis</name>
+        <value>
+          <string>error.txt</string>
         </value>
       </nameValuePair>
     </configurationParameterSettings>

@@ -52,8 +52,11 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	public ArrayList<Posting> postings;
 		
   private Writer fileWriter = null;
+  private Writer errorWriter = null;
   
   public String output;
+  
+  public String errorOutput;
   
 	public void initialize() throws ResourceInitializationException {
 
@@ -66,9 +69,11 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		MR = new ArrayList<Double>();
 		postings = new ArrayList<Posting>();
 		
-		output = (String)getConfigParameterValue("report");//"src/main/data/document.txt";
+		output = (String)getConfigParameterValue("report");
+		errorOutput = (String)getConfigParameterValue("errorAnalysis");
     try {
       fileWriter = new FileWriter(new File(output));
+      errorWriter = new FileWriter(errorOutput);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -93,7 +98,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
       //Make sure that your previous annotators have populated this in CAS
       FSList fsTokenList = doc.getTokenList();
-      ArrayList<Token>tokenList=Utils.fromFSListToCollection(fsTokenList, Token.class);
+      ArrayList<Token>tokenList = Utils.fromFSListToCollection(fsTokenList, Token.class);
      
       qIdList.add(doc.getQueryID());
       relList.add(doc.getRelevanceValue());
@@ -180,9 +185,14 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	        if(rankList.get(j).relevance == 1){
 	          double aMR = ((double)1) / (j + 1);
 	          MR.add(aMR);
-	          fileWriter.append("cosine=" +aMR + "\trank=\t" + (j+1) +"\tqid=\t" +rankList.get(j).id +"\trel=\t"+rankList.get(j).relevance+"\t"+rankList.get(j).text+"\n");
-	         // System.out.println("index " + j  + "  " + rankList.get(j).id + "  " + rankList.get(j).relevance + "  " +rankList.get(j).text);
+	          fileWriter.append("cosine=" +rankList.get(j).score + "\trank=" + (j+1) +
+	                  "\tqid=" +rankList.get(j).id +"\trel="+rankList.get(j).relevance+
+	                  "\t"+rankList.get(j).text+"\n");
 	          break;
+	        }else{
+	           errorWriter.append("cosine=" +rankList.get(j).score + "\trank=" + (j+1) +
+	                    "\tqid=" +rankList.get(j).id +"\trel="+rankList.get(j).relevance+
+	                    "\t"+rankList.get(j).text+"\n");
 	        }
 	      }
 		  }		
@@ -192,6 +202,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		fileWriter.append("MRR="+metric_mrr);
 		System.out.println(" (MRR) Mean Reciprocal Rank ::" + metric_mrr);
 	  fileWriter.close();
+	  errorWriter.close();
 	}
 
 	/**
