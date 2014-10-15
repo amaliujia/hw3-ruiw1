@@ -1,5 +1,6 @@
 package annotators;
 
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import typesystems.Document;
@@ -12,12 +13,18 @@ import typesystems.Document;
 public class Posting implements Comparable<Posting>{
   public int id;
   public double score;
-  public Document doc;
+  public boolean isQuery;
+  public int relevance;
+  public String text;
+  public HashMap<String, Integer> tokenList;
  
-  public Posting(int ID, double aScore, Document aDoc){
+  public Posting(int ID, boolean isQuery, int relevance, String text){
     this.id = ID;
-    this.score = aScore;
-    this.doc = aDoc;
+    //this.score = aScore;
+    this.isQuery = isQuery;
+    this.relevance = relevance;
+    this.text = text;
+    tokenList = new HashMap<String, Integer>();
   }
   
   public int compareTo(Posting o) {

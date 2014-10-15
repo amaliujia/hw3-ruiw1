@@ -59,7 +59,6 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 			iter.moveToNext();
 			Document doc = (Document) iter.get();
 			createTermFreqVector(jcas, doc);
-		  jcas.addFsToIndexes(doc);
 		}
 	}
 	/**
@@ -72,34 +71,44 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 
 		String docText = doc.getText();
 		
-		//TODO: construct a vector of tokens and update the tokenList in CAS
+		//construct a vector of tokens and update the tokenList in CAS
 		String[] tokens = docText.split(" ");
-		ArrayList<Token> tempList = new ArrayList<Token>();//(ArrayList<Token>)JCasUtil.select(doc.getTokenList(), Token.class);
+		ArrayList<Token> tempList = new ArrayList<Token>();
 		for(int i = 0; i < tokens.length; i++){
-//		  try {
-//        String c[] = tokenizeQuery(tokens[i]);
-//        tokens[i] = c[0];
-//      } catch (IOException e) {
-//        // TODO Auto-generated catch block
-//        e.printStackTrace();
-//      }
-		  
 		  //set token list
-		  for(int j = 0; j < tempList.size(); j++){
-		    if(tempList.get(j).getText().equals(tokens[j])){
+		  int j;
+		  for(j = 0; j < tempList.size(); j++){
+		    if(tempList.get(j).getText().equals(tokens[i])){
 		       int tf = tempList.get(j).getFrequency();
 		       tf++;
 		       tempList.get(j).setFrequency(tf);
-		    }else{
-		      Token token = new Token(jcas);
-		      token.setText(tokens[i]);
-		      token.setFrequency(1);
-		      tempList.add(token);
+		       break;
 		    }
+		  }
+		  if(j >= tempList.size()){
+          Token token = new Token(jcas);
+          token.setText(tokens[i]);
+          token.setFrequency(1);
+          tempList.add(token);
 		  }
 		}
 	  doc.setTokenList(utils.Utils.fromCollectionToFSList(jcas, tempList));
+	  
 	}
+
+	 /**
+   * A basic white-space tokenizer, it deliberately does not split on punctuation!
+   *
+   * @param doc input text
+   * @return    a list of tokens.
+   */
+
+    List<String> tokenize0(String doc) {
+      List<String> res = new ArrayList<String>();
+      for (String s: doc.split("\\s+"))
+        res.add(s);
+      return res;
+  }
 	
 	/**
 	 * Use to remove stopwords and do stemming

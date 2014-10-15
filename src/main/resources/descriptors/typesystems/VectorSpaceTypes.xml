@@ -53,19 +53,7 @@
   <typeDescription>
       <name>typesystems.Query</name>
       <description/>
-      <supertypeName>uima.tcas.Annotation</supertypeName>
-      <features>
-        <featureDescription>
-          <name>queryID</name>
-          <description/>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>text</name>
-          <description/>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-      </features>
-    </typeDescription>
+      <supertypeName>typesystems.Document</supertypeName>
+      </typeDescription>
   </types>
 </typeSystemDescription>
