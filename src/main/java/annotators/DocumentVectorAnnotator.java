@@ -48,13 +48,11 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    
   }
   
 	public void process(JCas jcas) throws AnalysisEngineProcessException {
 
 		FSIterator<Annotation> iter = jcas.getAnnotationIndex().iterator();
-		//System.out.println("In Engine");
 		if (iter.isValid()) {
 			iter.moveToNext();
 			Document doc = (Document) iter.get();

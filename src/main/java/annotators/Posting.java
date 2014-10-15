@@ -28,8 +28,15 @@ public class Posting implements Comparable<Posting>{
   }
   
   public int compareTo(Posting o) {
-    if(this.score == o.score) return 0;
-    else if(this.score < o.score) return 1;
+    if(this.score == o.score){
+      if(this.relevance == 1){
+        return 1;
+      }else if(o.relevance == 1){
+         return -1;
+      }else {
+        return 0;
+      }
+    }else if(this.score < o.score) return 1;
     else return -1;
   } 
 }

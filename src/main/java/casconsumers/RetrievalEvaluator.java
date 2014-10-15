@@ -1,6 +1,9 @@
 package casconsumers;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -48,6 +51,10 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	
 	public ArrayList<Posting> postings;
 		
+  private Writer fileWriter = null;
+  
+  public String output;
+  
 	public void initialize() throws ResourceInitializationException {
 
 		qIdList = new ArrayList<Integer>();
@@ -58,6 +65,13 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		rankMap = new HashMap<Integer, ArrayList>();
 		MR = new ArrayList<Double>();
 		postings = new ArrayList<Posting>();
+		
+		output = (String)getConfigParameterValue("report");//"src/main/data/document.txt";
+    try {
+      fileWriter = new FileWriter(new File(output));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 	}
 
 	/**
@@ -94,11 +108,6 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
             aPosting.tokenList.put(tokenList.get(j).getText(), tokenList.get(j).getFrequency());
           }
           postings.add(aPosting);
-//        ArrayList<String> c = null;
-//        ArrayList<Integer> t = null;
-//        queryHashMap.put(doc.getQueryID(), query);
-//        System.out.println(queryHashMap.get(doc.getQueryID()).getText());
-//        similarityList.add(0.0);
       }else{// if it is a doc, then use a sort of cosine similarity formula
           int relevance = doc.getRelevanceValue();
           boolean isQuery = false;
@@ -108,28 +117,6 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
             aPosting.tokenList.put(tokenList.get(j).getText(), tokenList.get(j).getFrequency());
           }
           postings.add(aPosting);
-//          //System.out.println(queryHashMap.get(doc.getQueryID()).getText());
-//          Query queryDoc = queryHashMap.get(doc.getQueryID());
-//          if(queryDoc == null){
-//            try {
-//              throw new Exception();
-//            } catch (Exception e) {
-//              System.out.println("Query lost!!!");
-//              e.printStackTrace();
-//            }
-//          }
-
-//          
-//          ArrayList<Token> queryTokenList = utils.Utils.fromFSListToCollection(queryDoc.getTokenList(), Token.class);
-//          ArrayList<Token> docTokenList = utils.Utils.fromFSListToCollection(doc.getTokenList(), Token.class);
-//          
-//          for(int i = 0; i < queryTokenList.size(); i++){
-//            queryVector.put(queryTokenList.get(i).getText(), queryTokenList.get(i).getFrequency());
-//          }
-//          for(int i = 0; i <  docTokenList.size(); i++){
-//             docVector.put(docTokenList.get(i).getText(), docTokenList.get(i).getFrequency());
-//          }
-//          similarityList.add(computeCosineSimilarity(queryVector, docVector));
        }
       }
 		}
@@ -143,14 +130,12 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 			throws ResourceProcessException, IOException {
 
 		super.collectionProcessComplete(arg0);
-		
+    HashMap<Integer, ArrayList<Posting>> merger = new HashMap<Integer, ArrayList<Posting>>();
 		int index;
 		for(int i = 0; i < postings.size() ; i++){
 		  Posting a = postings.get(i);
 		  if(a.isQuery){
 		    a.score = 0.0;
-        System.out.println("-________________/");
-		   // similarityList.add(0.0);
 		  }else{
 		    int j;
 		    index = -1;
@@ -166,10 +151,17 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
 		    Posting query = postings.get(index);
 		    Posting doc = postings.get(i);
+		   
+		    if(merger.containsKey(doc.id)){
+		      ArrayList<Posting> p = merger.get(doc.id);
+		      p.add(doc);
+		      merger.put(doc.id, p);
+		    }else{
+		      ArrayList<Posting> p = new ArrayList<Posting>();
+		      p.add(doc);
+		      merger.put(doc.id, p);
+		    }
 		    
-        System.out.print(query.id + "  " + query.relevance + "  ");
-        System.out.print(doc.id + "  " + doc.relevance + " " );
-        System.out.println();
 		    HashMap<String, Integer> queryVector = query.tokenList;
 		    HashMap<String, Integer> docVector = doc.tokenList;
 		    
@@ -177,34 +169,29 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		  }
 		}
 		
-//		for(int z = 0; z < postings.size(); z++){
-//		  System.out.println(postings.get(z).id + "   " + postings.get(z).score + "   " + postings.get(z).relevance);
-//		}
 		// compute the rank of retrieved sentences
 		// the real wrok is to sort
-		//Iterator it = queryHashMap.keySet().iterator();
-//		while(it.hasNext()){
-//		  int id = (Integer) it.next();
-//		  ArrayList<Posting> rankList = new ArrayList<Posting>();
-//		  for(int i = 0; i < qIdList.size(); i++){
-//		    if((qIdList.get(i) == id) && (relList.get(i) != 99)){
-//		      rankList.add(new Posting(id, similarityList.get(i), docList.get(i)));
-//		    }
-//		  }
-//		  Collections.sort(rankList);
-//		  for(int j = 0; j < rankList.size(); j++){
-//		    if(rankList.get(j).doc.getRelevanceValue() == 1){
-//		      MR.add(((double)1 / (j + 1)));
-//		      System.out.println(rankList.get(j).doc.getQueryID() + "  " + rankList.get(j).doc.getRelevanceValue() + "  " +rankList.get(j).doc.getText() );
-//		      break;
-//		    }
-//		  }
-//		}
+		  Iterator it = merger.keySet().iterator();
+		  while(it.hasNext()){
+		      int id = (Integer) it.next();
+		      ArrayList<Posting> rankList = merger.get(id);
+		      Collections.sort(rankList);		     
+	      for(int j = 0; j < rankList.size(); j++){
+	        if(rankList.get(j).relevance == 1){
+	          double aMR = ((double)1) / (j + 1);
+	          MR.add(aMR);
+	          fileWriter.append("cosine=" +aMR + "\trank=\t" + (j+1) +"\tqid=\t" +rankList.get(j).id +"\trel=\t"+rankList.get(j).relevance+"\t"+rankList.get(j).text+"\n");
+	         // System.out.println("index " + j  + "  " + rankList.get(j).id + "  " + rankList.get(j).relevance + "  " +rankList.get(j).text);
+	          break;
+	        }
+	      }
+		  }		
 		
-		
-		// TODO :: compute the metric:: mean reciprocal rank
+		//compute the metric:: mean reciprocal rank
 		double metric_mrr = compute_mrr();
+		fileWriter.append("MRR="+metric_mrr);
 		System.out.println(" (MRR) Mean Reciprocal Rank ::" + metric_mrr);
+	  fileWriter.close();
 	}
 
 	/**
@@ -246,8 +233,11 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	private double compute_mrr() {
 		double metric_mrr=0.0;
 
-		// TODO :: compute Mean Reciprocal Rank (MRR) of the text collection
-		
+		//compute Mean Reciprocal Rank (MRR) of the text collection
+		for(int i = 0; i < MR.size(); i++){
+		  metric_mrr += MR.get(i);
+		}
+		metric_mrr /= MR.size();
 		return metric_mrr;
 	}
 
