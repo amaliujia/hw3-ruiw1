@@ -12,9 +12,6 @@ import java.util.Scanner;
 
 import org.apache.axis.Version;
 import org.apache.axis.wsdl.symbolTable.Utils;
-import org.apache.lucene.analysis.Analyzer.TokenStreamComponents;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -32,13 +29,13 @@ import typesystems.*;;
 
 public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 
-  public static EnglishAnalyzerConfigurable analyzer;
+  //public static EnglishAnalyzerConfigurable analyzer;
   private String stopwordsFile;
   private HashSet<String> stopwords;
   public void initialize(UimaContext aContext){
     stopwordsFile = (String)aContext.getConfigParameterValue("stopwords");
     stopwords = new HashSet<String>();
-    analyzer = new EnglishAnalyzerConfigurable (org.apache.lucene.util.Version.LUCENE_40);
+    //analyzer = new EnglishAnalyzerConfigurable (org.apache.lucene.util.Version.LUCENE_40);
     try {
       File file = new File(stopwordsFile);
       Scanner scanner = new Scanner(file);
@@ -116,20 +113,20 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 	 *       The cleaner word
 	 * @throws IOException
 	 */
-  public String[] tokenizeQuery(String query) throws IOException {
-
-    TokenStreamComponents comp = analyzer.createComponents("dummy", new StringReader(query));
-    TokenStream tokenStream = comp.getTokenStream();
-
-    CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
-    tokenStream.reset();
-
-    List<String> tokens = new ArrayList<String>();
-    while (tokenStream.incrementToken()) {
-      String term = charTermAttribute.toString();
-      tokens.add(term);
-    }
-    return tokens.toArray(new String[tokens.size()]);
-  }
+//  public String[] tokenizeQuery(String query) throws IOException {
+//
+//    TokenStreamComponents comp = analyzer.createComponents("dummy", new StringReader(query));
+//    TokenStream tokenStream = comp.getTokenStream();
+//
+//    CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+//    tokenStream.reset();
+//
+//    List<String> tokens = new ArrayList<String>();
+//    while (tokenStream.incrementToken()) {
+//      String term = charTermAttribute.toString();
+//      tokens.add(term);
+//    }
+//    return tokens.toArray(new String[tokens.size()]);
+//  }
 
 }
