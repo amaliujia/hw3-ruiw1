@@ -67,13 +67,14 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 		String docText = doc.getText();
 		
 		//construct a vector of tokens and update the tokenList in CAS
-		String[] tokens = docText.split(" ");
+		//String[] tokens = docText.split(" ");
+		ArrayList<String> tokens = (ArrayList<String>) tokenize0(docText);
 		ArrayList<Token> tempList = new ArrayList<Token>();
-		for(int i = 0; i < tokens.length; i++){
+		for(int i = 0; i < tokens.size(); i++){
 		  //set token list
 		  int j;
 		  for(j = 0; j < tempList.size(); j++){
-		    if(tempList.get(j).getText().equals(tokens[i])){
+		    if(tempList.get(j).getText().equals(tokens.get(i))){
 		       int tf = tempList.get(j).getFrequency();
 		       tf++;
 		       tempList.get(j).setFrequency(tf);
@@ -82,7 +83,7 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 		  }
 		  if(j >= tempList.size()){
           Token token = new Token(jcas);
-          token.setText(tokens[i]);
+          token.setText(tokens.get(i));
           token.setFrequency(1);
           tempList.add(token);
 		  }

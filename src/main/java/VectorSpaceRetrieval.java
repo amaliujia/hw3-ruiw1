@@ -52,7 +52,7 @@ public class VectorSpaceRetrieval {
 		AnalysisEngine anAnalysisEngine = UIMAFramework.produceAnalysisEngine(desc);
 		CAS aCas = anAnalysisEngine.newCAS();
 
-	  URL docUrl = VectorSpaceRetrieval.class.getResource("/data/documents.txt");
+	  URL docUrl = VectorSpaceRetrieval.class.getResource("/data/document2.txt");
     if (docUrl == null) {
        throw new IllegalArgumentException("Error opening data/documents.txt");
     }

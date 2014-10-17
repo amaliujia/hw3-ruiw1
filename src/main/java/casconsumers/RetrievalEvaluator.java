@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -170,13 +171,15 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		    HashMap<String, Integer> queryVector = query.tokenList;
 		    HashMap<String, Integer> docVector = doc.tokenList;
 		    
-		    a.score = computeCosineSimilarity(queryVector, docVector);
+		    //a.score = computeCosineSimilarity(queryVector, docVector);
+		    a.score = computeSorensonIndex(queryVector, docVector);
 		  }
 		}
 		
 		// compute the rank of retrieved sentences
 		// the real wrok is to sort
 		  Iterator it = merger.keySet().iterator();
+		  DecimalFormat df = new DecimalFormat("0.0000");   
 		  while(it.hasNext()){
 		      int id = (Integer) it.next();
 		      ArrayList<Posting> rankList = merger.get(id);
@@ -185,24 +188,24 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	        if(rankList.get(j).relevance == 1){
 	          double aMR = ((double)1) / (j + 1);
 	          MR.add(aMR);
-	          fileWriter.append("cosine=" +rankList.get(j).score + "\trank=" + (j+1) +
+	          fileWriter.append("cosine=" + df.format(rankList.get(j).score) + "\trank=" + (j+1) +
 	                  "\tqid=" +rankList.get(j).id +"\trel="+rankList.get(j).relevance+
 	                  "\t"+rankList.get(j).text+"\n");
 	          break;
 	        }else{
-	           errorWriter.append("cosine=" +rankList.get(j).score + "\trank=" + (j+1) +
+	           errorWriter.append("cosine=" + df.format(rankList.get(j).score) + "\trank=" + (j+1) +
 	                    "\tqid=" +rankList.get(j).id +"\trel="+rankList.get(j).relevance+
 	                    "\t"+rankList.get(j).text+"\n");
 	        }
 	      }
 		  }		
 		
-		//compute the metric:: mean reciprocal rank
-		double metric_mrr = compute_mrr();
-		fileWriter.append("MRR="+metric_mrr);
-		System.out.println(" (MRR) Mean Reciprocal Rank ::" + metric_mrr);
-	  fileWriter.close();
-	  errorWriter.close();
+		  //compute the metric:: mean reciprocal rank
+		  double metric_mrr = compute_mrr();
+		  fileWriter.append("MRR=" + df.format(metric_mrr));
+		  System.out.println(" (MRR) Mean Reciprocal Rank ::" + metric_mrr);
+		  fileWriter.close();
+		  errorWriter.close();
 	}
 
 	/**
@@ -224,17 +227,44 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		     // System.out.println(key + "  " + queryVector.get(key) + "   " + docVector.get(key));
 		    }
 		    queryNorm += (Math.pow(queryVector.get(key), 2));
-    }
+		  }
 		
-		it = docVector.keySet().iterator();
-		while(it.hasNext()){
-		  String key = it.next();
-		  docNorm += (Math.pow(docVector.get(key), 2));
-		}
-		// the most naive way to implement cosine similarities
-		cosine_similarity = cosine_similarity / (Math.sqrt(queryNorm) * Math.sqrt(docNorm));
-	//	System.out.println("----------" + cosine_similarity);
-		return cosine_similarity;
+		  it = docVector.keySet().iterator();
+		  while(it.hasNext()){
+		    String key = it.next();
+		    docNorm += (Math.pow(docVector.get(key), 2));
+		  }
+		  // the most naive way to implement cosine similarities
+		  cosine_similarity = cosine_similarity / (Math.sqrt(queryNorm) * Math.sqrt(docNorm));
+		  return cosine_similarity;
+	}
+	
+	private double computeSorensonIndex(Map<String, Integer> queryVector,
+	                                    Map<String, Integer> docVector)
+	{
+	    double sorensonIndex = 0.0;
+	    double queryLength = 0.0;
+	    double docLength = 0.0;
+	    
+	    Iterator<String> it = queryVector.keySet().iterator();
+	     while (it.hasNext()) {
+	        String key = it.next();
+	        if(docVector.containsKey(key)){
+	          sorensonIndex += (queryVector.get(key) * docVector.get(key));
+	         // System.out.println(key + "  " + queryVector.get(key) + "   " + docVector.get(key));
+	        }
+	        queryLength += (Math.pow(queryVector.get(key), 2));
+	     }
+	     
+	      it = docVector.keySet().iterator();
+	      while(it.hasNext()){
+	        String key = it.next();
+	        docLength += (Math.pow(docVector.get(key), 2));
+	      }
+	      
+	      sorensonIndex = 2 * sorensonIndex / (docLength + queryLength);
+	      
+	      return sorensonIndex;
 	}
 
 	/**
@@ -243,7 +273,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	 */
 	private double compute_mrr() {
 		double metric_mrr=0.0;
-
+		DecimalFormat dFormat = new DecimalFormat("");
 		//compute Mean Reciprocal Rank (MRR) of the text collection
 		for(int i = 0; i < MR.size(); i++){
 		  metric_mrr += MR.get(i);
