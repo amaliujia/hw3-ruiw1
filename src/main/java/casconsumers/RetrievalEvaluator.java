@@ -202,7 +202,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
     // compute the metric:: mean reciprocal rank
     double metric_mrr = compute_mrr();
     fileWriter.append("MRR=" + df.format(metric_mrr));
-    System.out.println(" (MRR) Mean Reciprocal Rank ::" + metric_mrr);
+    System.out.println(" (MRR) Mean Reciprocal Rank ::" + df.format(metric_mrr));
     fileWriter.close();
     errorWriter.close();
   }

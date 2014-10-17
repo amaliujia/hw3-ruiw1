@@ -25,6 +25,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.util.JCasUtil;
 
 import typesystems.*;
+import utils.StanfordLemmatizer;
 
 ;
 
@@ -69,6 +70,7 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
   private void createTermFreqVector(JCas jcas, Document doc) {
 
     String docText = doc.getText();
+    docText = StanfordLemmatizer.stemText(docText);
 
     // construct a vector of tokens and update the tokenList in CAS
     // String[] tokens = docText.split(" ");
@@ -111,6 +113,23 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
     return res;
   }
 
+  /**
+   * A basic white-space tokenizer that supports removing stopwords
+   * 
+   * @param doc
+   *          input text
+   * @return a list of tokens.
+   */
+
+  List<String> tokenize1(String doc) {
+    List<String> res = new ArrayList<String>();
+    for (String s : doc.split("\\s+")){
+      if(!stopwords.contains(s))
+         res.add(s);
+    }
+    return res;
+  }
+  
   /**
    * Use to remove stopwords and do stemming
    * 
