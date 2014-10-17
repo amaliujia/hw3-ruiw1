@@ -119,20 +119,21 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
    * @return The cleaner word
    * @throws IOException
    */
-  // public String[] tokenizeQuery(String query) throws IOException {
-  //
-  // TokenStreamComponents comp = analyzer.createComponents("dummy", new StringReader(query));
-  // TokenStream tokenStream = comp.getTokenStream();
-  //
-  // CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
-  // tokenStream.reset();
-  //
-  // List<String> tokens = new ArrayList<String>();
-  // while (tokenStream.incrementToken()) {
-  // String term = charTermAttribute.toString();
-  // tokens.add(term);
-  // }
-  // return tokens.toArray(new String[tokens.size()]);
-  // }
+   public String[] tokenizeQuery(String query) throws IOException {
+  
+//   TokenStreamComponents comp = analyzer.createComponents("dummy", new StringReader(query));
+//   TokenStream tokenStream = comp.getTokenStream();
+//  
+//   CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+//   tokenStream.reset();
+//  
+//   List<String> tokens = new ArrayList<String>();
+//   while (tokenStream.incrementToken()) {
+//   String term = charTermAttribute.toString();
+//   tokens.add(term);
+//   }
+//   return tokens.toArray(new String[tokens.size()]);
+     return null;
+   }
 
 }
