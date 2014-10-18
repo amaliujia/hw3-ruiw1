@@ -78,7 +78,7 @@ public class StanfordLemmatizer {
    * Some stupid test.
    */
   public static void main(String args[]) {
-    String origText = "On March 2, 1962, Wilt Chamberlain scored a record 100 points in a game against the New York Knicks.";
+    String origText = "volcanic";
     
     System.out.println(stemText(origText));
     System.out.println("==================");

@@ -1,11 +1,11 @@
 qid=1	rel=99	Give us the name of the volcano that destroyed the ancient city of Pompeii
-qid=1	rel=1	In A.D. 79, long-dormant Mount Vesuvius erupted, burying in volcanic ash the Roman city of Pompeii; an  estimated 20,000 people died.
+qid=1	rel=1	In A.D. 79, long-dormant Mount Vesuvius erupted, burying in volcanic ash the Roman city of Pompeii; an estimated 20,000 people died.
 qid=1	rel=0	You can see Vesuvius in the background, near ruins of Pompei; its last eruption was in 1944.
 qid=1	rel=0	Vesuvius is located near the ruins of the destroyed city of Pompeii.
 qid=1	rel=0	In 79 A.D., this ancient city was buried in an avalanche of hot ash from Mount Vesuvius.
 qid=2	rel=99	What has been the largest crowd to ever come see Michael Jordan
 qid=2	rel=1	When Michael Jordan--one of the greatest basketball player of all time--made what was expected to be his last trip to play in Atlanta last  March, an NBA record 62,046 fans turned out to see him and the  Bulls.
-qid=2	rel=0	A supposedly last play of  Michael Jordan gathered some of the largest crowd in history of NBA.
+qid=2	rel=0	A supposedly last play of Michael Jordan gathered some of the largest crowd in history of NBA.
 qid=2	rel=0	The Immortal World Tour of Michael Jackson gathered some of the largest crowds of fans in the history of pop music.
 qid=2	rel=0	In the Bulls' last visit to Atlanta, an NBA-record 62,046 fans showed up at the Georgia Dome.
 qid=3	rel=99	In which year did a purchase of Alaska happen?

@@ -1,3 +1,2 @@
 cosine=0.6396	rank=1	qid=1	rel=0	Vesuvius is located near the ruins of the destroyed city of Pompeii. 
-cosine=0.4082	rank=1	qid=5	rel=0	Yellow river is often called the mother of China 
-cosine=0.1633	rank=2	qid=5	rel=0	Yangtze is longest river in Asia in general and in China, in particular. 
+cosine=0.5443	rank=1	qid=5	rel=0	Yellow river is often called the mother of China 

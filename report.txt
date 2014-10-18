@@ -1,6 +1,6 @@
-cosine=0.2667	rank=2	qid=1	rel=1	In A.D. 79, long-dormant Mount Vesuvius erupted, burying in volcanic ash the Roman city of Pompeii; an  estimated 20,000 people died. 
+cosine=0.2667	rank=2	qid=1	rel=1	In A.D. 79, long-dormant Mount Vesuvius erupted, burying in volcanic ash the Roman city of Pompeii; an estimated 20,000 people died. 
 cosine=0.4003	rank=1	qid=2	rel=1	When Michael Jordan--one of the greatest basketball player of all time--made what was expected to be his last trip to play in Atlanta last  March, an NBA record 62,046 fans turned out to see him and the  Bulls. 
 cosine=0.4714	rank=1	qid=3	rel=1	Alaska was purchased from Russia in year 1867. 
 cosine=0.3086	rank=1	qid=4	rel=1	On March 2, 1962, Wilt Chamberlain scored a record 100 points in a game against the New York Knicks. 
-cosine=0.0990	rank=3	qid=5	rel=1	People of China have mixed feelings about River, which they often call "sorrow of China" 
-MRR=0.7667
+cosine=0.1980	rank=2	qid=5	rel=1	People of China have mixed feelings about River, which they often call "sorrow of China" 
+MRR=0.8000

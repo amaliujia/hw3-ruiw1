@@ -1,4 +1,4 @@
-package annotators;
+package utils;
 
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentMap;

@@ -26,10 +26,10 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.ProcessTrace;
 
-import annotators.Posting;
 import typesystems.Document;
 import typesystems.Token;
 import typesystems.Query;
+import utils.Posting;
 import utils.Utils;
 
 public class RetrievalEvaluator extends CasConsumer_ImplBase {
