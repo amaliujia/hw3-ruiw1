@@ -78,7 +78,7 @@ public class StanfordLemmatizer {
    * Some stupid test.
    */
   public static void main(String args[]) {
-    String origText = "volcanic";
+    String origText = "four minutes";
     
     System.out.println(stemText(origText));
     System.out.println("==================");
