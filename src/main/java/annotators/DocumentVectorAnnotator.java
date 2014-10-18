@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import org.apache.axis.Version;
 import org.apache.axis.wsdl.symbolTable.Utils;
@@ -74,7 +75,7 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 
     // construct a vector of tokens and update the tokenList in CAS
     // String[] tokens = docText.split(" ");
-    ArrayList<String> tokens = (ArrayList<String>) tokenize0(docText);
+    ArrayList<String> tokens = (ArrayList<String>) tokenize1(docText);
     ArrayList<Token> tempList = new ArrayList<Token>();
     for (int i = 0; i < tokens.size(); i++) {
       // set token list
@@ -124,35 +125,20 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
   List<String> tokenize1(String doc) {
     List<String> res = new ArrayList<String>();
     for (String s : doc.split("\\s+")){
-      if(!stopwords.contains(s))
-         res.add(s);
+//      if(stopwords.contains(s))
+//        continue;
+      if(Pattern.matches(".*'", s)){
+        res.add(s.substring(0, s.indexOf("'")));
+      }else if(Pattern.matches(".*;", s)){
+        res.add(s.substring(0, s.indexOf(";")));
+      }else if(Pattern.matches(".*\\?", s)){
+        res.add(s.substring(0, s.indexOf("?")));
+      }else {
+        res.add(s);
+      }
     }
     return res;
   }
-  
-  /**
-   * Use to remove stopwords and do stemming
-   * 
-   * @param query
-   *          the word need to deal with.
-   * @return The cleaner word
-   * @throws IOException
-   */
-   public String[] tokenizeQuery(String query) throws IOException {
-  
-//   TokenStreamComponents comp = analyzer.createComponents("dummy", new StringReader(query));
-//   TokenStream tokenStream = comp.getTokenStream();
-//  
-//   CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
-//   tokenStream.reset();
-//  
-//   List<String> tokens = new ArrayList<String>();
-//   while (tokenStream.incrementToken()) {
-//   String term = charTermAttribute.toString();
-//   tokens.add(term);
-//   }
-//   return tokens.toArray(new String[tokens.size()]);
-     return null;
-   }
+
 
 }

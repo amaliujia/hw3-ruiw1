@@ -13,10 +13,10 @@ qid=3	rel=1	Alaska was purchased from Russia in year 1867.
 qid=3	rel=0	1867 - U.S. President Andrew Jackson proclaims treaty for purchase of Alaska from Russia.
 qid=3	rel=0	William Seward negotiated a purchase of Alaska for $7.2 million.
 qid=4	rel=99	What year did Wilt Chamberlain score 100 points?
-qid=4	rel=1	On March 2, 1962, Wilt Chamberlain scored a record 100 points in a   game against the New York Knicks.
+qid=4	rel=1	On March 2, 1962, Wilt Chamberlain scored a record 100 points in a game against the New York Knicks.
 qid=4	rel=0	A 100 point game was a highlight in a career of Wilt Chamberlain
-qid=4	rel=0	Wilt Chamberlain most famous record is the 100 points he scored in the   Philadelphia Warriors' 169-147 defeat of the New York Knicks.
+qid=4	rel=0	Wilt Chamberlain most famous record is the 100 points he scored in the Philadelphia Warriors' 169-147 defeat of the New York Knicks.
 qid=5	rel=99	What river is called China's Sorrow?
-qid=5	rel=1	People of China have mixed feelings about  River, which they often call "sorrow of China"
+qid=5	rel=1	People of China have mixed feelings about River, which they often call "sorrow of China"
 qid=5	rel=0	Yangtze is longest river in Asia in general and in China, in particular.
 qid=5	rel=0	Yellow river is often called the mother of China

@@ -15,6 +15,8 @@ package utils;
  *  limitations under the License.
  */
 
+import java.util.regex.Pattern;
+
 import edu.stanford.nlp.process.Morphology;
 
 /**
@@ -76,11 +78,15 @@ public class StanfordLemmatizer {
    * Some stupid test.
    */
   public static void main(String args[]) {
-    String origText = "tested tester tested gone indices indices super_testers"
-                    + "had having been was were would could might";
+    String origText = "On March 2, 1962, Wilt Chamberlain scored a record 100 points in a game against the New York Knicks.";
     
     System.out.println(stemText(origText));
     System.out.println("==================");
     System.out.println(origText);
+    
+    System.out.println("==================");
+    if(Pattern.matches(".*\\?", "happen?")){
+      System.out.println("Yes");
+    }
   }
 }
