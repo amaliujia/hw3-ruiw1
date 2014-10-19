@@ -11,7 +11,7 @@ import typesystems.Document;
  * @author amaliujia
  * 
  */
-public class Posting implements Comparable<Posting> {
+public class Posting implements Comparable<Posting>{
   public int id;
 
   public double score;
@@ -26,7 +26,6 @@ public class Posting implements Comparable<Posting> {
 
   public Posting(int ID, boolean isQuery, int relevance, String text) {
     this.id = ID;
-    // this.score = aScore;
     this.isQuery = isQuery;
     this.relevance = relevance;
     this.text = text;

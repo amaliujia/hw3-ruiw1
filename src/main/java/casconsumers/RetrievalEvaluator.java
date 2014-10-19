@@ -29,6 +29,7 @@ import org.apache.uima.util.ProcessTrace;
 import typesystems.Document;
 import typesystems.Token;
 import typesystems.Query;
+
 import utils.Posting;
 import utils.Utils;
 
@@ -50,7 +51,11 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
   public ArrayList<Double> MR;
 
-  public ArrayList<Posting> postings;
+  public ArrayList<Posting> cosinePostings;
+
+  public ArrayList<Posting> dicePostings;
+
+  public ArrayList<Posting> jaccardPostings;
 
   private Writer fileWriter = null;
 
@@ -69,8 +74,9 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
     queryHashMapTF = new HashMap<Integer, ArrayList<Integer>>();
     rankMap = new HashMap<Integer, ArrayList>();
     MR = new ArrayList<Double>();
-    postings = new ArrayList<Posting>();
-
+    cosinePostings = new ArrayList<Posting>();
+//    dicePostings = new ArrayList<Posting>();
+//    jaccardPostings = new ArrayList<Posting>();
     output = (String) getConfigParameterValue("report");
     errorOutput = (String) getConfigParameterValue("errorAnalysis");
     try {
@@ -113,7 +119,9 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
         for (int j = 0; j < tokenList.size(); j++) {
           aPosting.tokenList.put(tokenList.get(j).getText(), tokenList.get(j).getFrequency());
         }
-        postings.add(aPosting);
+        cosinePostings.add(aPosting);
+        //dicePostings.add(aPosting);
+        //jaccardPostings.add(aPosting);
       } else {// if it is a doc, then use a sort of cosine similarity formula
         int relevance = doc.getRelevanceValue();
         boolean isQuery = false;
@@ -122,7 +130,9 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
         for (int j = 0; j < tokenList.size(); j++) {
           aPosting.tokenList.put(tokenList.get(j).getText(), tokenList.get(j).getFrequency());
         }
-        postings.add(aPosting);
+        cosinePostings.add(aPosting);
+//        dicePostings.add(aPosting);
+//        jaccardPostings.add(aPosting);
       }
     }
   }
@@ -136,15 +146,15 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
     super.collectionProcessComplete(arg0);
     HashMap<Integer, ArrayList<Posting>> merger = new HashMap<Integer, ArrayList<Posting>>();
     int index;
-    for (int i = 0; i < postings.size(); i++) {
-      Posting a = postings.get(i);
+    for (int i = 0; i < cosinePostings.size(); i++) {
+      Posting a = cosinePostings.get(i);
       if (a.isQuery) {
         a.score = 0.0;
       } else {
         int j;
         index = -1;
-        for (j = 0; j < postings.size(); j++) {
-          if (a.id == postings.get(j).id && j != i) {
+        for (j = 0; j < cosinePostings.size(); j++) {
+          if (a.id == cosinePostings.get(j).id && j != i) {
             index = j;
             break;
           }
@@ -153,8 +163,8 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
           System.out.println("-________________/");
         }
 
-        Posting query = postings.get(index);
-        Posting doc = postings.get(i);
+        Posting query = cosinePostings.get(index);
+        Posting doc = cosinePostings.get(i);
 
         if (merger.containsKey(doc.id)) {
           ArrayList<Posting> p = merger.get(doc.id);
@@ -169,9 +179,9 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
         HashMap<String, Integer> queryVector = query.tokenList;
         HashMap<String, Integer> docVector = doc.tokenList;
 
-        a.score = computeCosineSimilarity(queryVector, docVector);
+         a.score = computeCosineSimilarity(queryVector, docVector);
         // a.score = computeSorensonIndex(queryVector, docVector);
-        // a.score = computeJaccardIndex(queryVector, docVector);
+        //a.score = computeJaccardIndex(queryVector, docVector);
       }
     }
 
