@@ -136,6 +136,11 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
   List<String> tokenize1(String doc) {
     List<String> res = new ArrayList<String>();
     for (String s : doc.split("\\s+")) {
+ 
+      if(stopwords.contains(s)){
+        continue;
+      }
+      
       if (Pattern.matches(".*'", s)) {
         res.add(s.substring(0, s.indexOf("'")));
       } else if (Pattern.matches(".*;", s)) {
