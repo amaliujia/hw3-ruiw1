@@ -82,11 +82,11 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
   private void createTermFreqVector(JCas jcas, Document doc) {
 
     String docText = doc.getText();
-    docText = StanfordLemmatizer.stemText(docText);
+    //docText = StanfordLemmatizer.stemText(docText);
 
     // construct a vector of tokens and update the tokenList in CAS
     // String[] tokens = docText.split(" ");
-    ArrayList<String> tokens = (ArrayList<String>) tokenize1(docText);
+    ArrayList<String> tokens = (ArrayList<String>) tokenize0(docText);
     ArrayList<Token> tempList = new ArrayList<Token>();
     for (int i = 0; i < tokens.size(); i++) {
       // set token list
