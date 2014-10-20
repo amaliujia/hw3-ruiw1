@@ -15,7 +15,20 @@ import org.apache.uima.jcas.cas.TOP;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.util.JCasUtil;
 
+/**
+ * Methods tool box.
+ * @author amaliujia
+ *
+ */
 public class Utils {
+  /**
+   * Get a list from FSList
+   * @param list
+   *        Input FSList
+   * @param classType
+   *        Element type in FSList
+   * @return arraylist<T>
+   */
   public static <T extends TOP> ArrayList<T> fromFSListToCollection(FSList list, Class<T> classType) {
 
     Collection<T> myCollection = JCasUtil.select(list, classType);
@@ -26,6 +39,12 @@ public class Utils {
     return new ArrayList<T>(myCollection);
   }
 
+  /**
+   * Create a String list
+   * @param aJCas
+   * @param aCollection
+   * @return created StringList
+   */
   public static StringList createStringList(JCas aJCas, Collection<String> aCollection) {
     if (aCollection.size() == 0) {
       return new EmptyStringList(aJCas);
@@ -47,6 +66,14 @@ public class Utils {
     return list;
   }
 
+  /**
+   * Get FSList from list
+   * @param aJCas
+   *        JCas
+   * @param aCollection
+   *        List
+   * @return Created FSList
+   */
   public static <T extends Annotation> FSList fromCollectionToFSList(JCas aJCas,
           Collection<T> aCollection) {
     if (aCollection.size() == 0) {

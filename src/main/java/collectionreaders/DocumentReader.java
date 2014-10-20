@@ -14,6 +14,9 @@ import typesystems.Document;
 
 public class DocumentReader extends JCasAnnotator_ImplBase {
 
+  /**
+   * Line by Line document processing.
+   */
   public void process(JCas jcas) throws AnalysisEngineProcessException {
     // System.out.println("Reader");
     // reading sentence from the CAS
@@ -42,6 +45,12 @@ public class DocumentReader extends JCasAnnotator_ImplBase {
     jcas.addFsToIndexes(doc);
   }
 
+  /**
+   * Make sure parse text line correctly.
+   * @param line
+   *        Input text
+   * @return Parse result
+   */
   public static ArrayList<String> parseDataLine(String line) {
     ArrayList<String> docInfo;
 

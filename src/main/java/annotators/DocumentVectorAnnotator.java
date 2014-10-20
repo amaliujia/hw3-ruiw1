@@ -28,8 +28,11 @@ import org.uimafit.util.JCasUtil;
 import typesystems.*;
 import utils.StanfordLemmatizer;
 
-;
-
+/**
+ * Document annotator, in charge of tokenize query and document text, and build vector space
+ * @author amaliujia
+ *
+ */
 public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 
   // public static EnglishAnalyzerConfigurable analyzer;
@@ -37,6 +40,9 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 
   private HashSet<String> stopwords;
 
+  /**
+   * Initialize necessary fields.
+   */
   public void initialize(UimaContext aContext) {
     stopwordsFile = (String) aContext.getConfigParameterValue("stopwords");
     stopwords = new HashSet<String>();
@@ -52,6 +58,9 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
     }
   }
 
+  /**
+   * A part of pipeline, process one document per time.
+   */
   public void process(JCas jcas) throws AnalysisEngineProcessException {
 
     FSIterator<Annotation> iter = jcas.getAnnotationIndex().iterator();
@@ -63,9 +72,11 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
   }
 
   /**
-   * 
+   * To create term frequency vectors.
    * @param jcas
+   *          UIMA JCas
    * @param doc
+   *        Input text
    */
 
   private void createTermFreqVector(JCas jcas, Document doc) {
@@ -115,7 +126,7 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
   }
 
   /**
-   * A basic white-space tokenizer that supports removing stopwords
+   * A basic white-space tokenizer that removes uncessary punctuations.
    * 
    * @param doc
    *          input text

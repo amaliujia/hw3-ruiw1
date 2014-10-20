@@ -34,8 +34,18 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.util.XMLInputSource;
 
+/**
+ * This is start of UIMA system
+ *
+ */
 public class VectorSpaceRetrieval {
-
+  
+  /**
+   * System entrance
+   * @param args
+   * @throws Exception
+   *          throws when Exception, like file not found
+   */
   public static void main(String[] args) throws Exception {
 
     String sLine;

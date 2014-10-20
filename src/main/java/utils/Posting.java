@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentMap;
 import typesystems.Document;
 
 /**
- * Use to sort final results
+ * Use to save and sort final results
  * 
  * @author amaliujia
  * 
@@ -24,6 +24,17 @@ public class Posting implements Comparable<Posting>{
 
   public HashMap<String, Integer> tokenList;
 
+  /**
+   * Constructor
+   * @param ID
+   *        Query id
+   * @param isQuery
+   *        if this is a query
+   * @param relevance
+   *        relevance measure
+   * @param text
+   *        Document or query text
+   */
   public Posting(int ID, boolean isQuery, int relevance, String text) {
     this.id = ID;
     this.isQuery = isQuery;
@@ -32,6 +43,13 @@ public class Posting implements Comparable<Posting>{
     tokenList = new HashMap<String, Integer>();
   }
 
+  /**
+   * Interface method, used to sort Posting list.
+   * @param o
+   *        Comparison target
+   * @return Comparison result, 1 is this > o, -1 is this < o,
+   *         and 0 is this == o
+   */
   public int compareTo(Posting o) {
     if (this.score == o.score) {
       if (this.relevance == 1) {

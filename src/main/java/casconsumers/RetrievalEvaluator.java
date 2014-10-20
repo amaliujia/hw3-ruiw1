@@ -65,6 +65,9 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
   public String errorOutput;
 
+  /**
+   * Initialize necessary fields.
+   */
   public void initialize() throws ResourceInitializationException {
 
     qIdList = new ArrayList<Integer>();
@@ -120,8 +123,6 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
           aPosting.tokenList.put(tokenList.get(j).getText(), tokenList.get(j).getFrequency());
         }
         cosinePostings.add(aPosting);
-        //dicePostings.add(aPosting);
-        //jaccardPostings.add(aPosting);
       } else {// if it is a doc, then use a sort of cosine similarity formula
         int relevance = doc.getRelevanceValue();
         boolean isQuery = false;
@@ -131,8 +132,6 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
           aPosting.tokenList.put(tokenList.get(j).getText(), tokenList.get(j).getFrequency());
         }
         cosinePostings.add(aPosting);
-//        dicePostings.add(aPosting);
-//        jaccardPostings.add(aPosting);
       }
     }
   }
@@ -219,6 +218,10 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
   /**
    * 
+   * @param queryVector
+   *          input query vector
+   * @param docVector
+   *          input doc vector
    * @return cosine_similarity
    */
   private double computeCosineSimilarity(Map<String, Integer> queryVector,
@@ -251,8 +254,10 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
   /**
    * 
    * @param queryVector
+   *          input query vector
    * @param docVector
-   * @return
+   *          input doc vector
+   * @return Dice similarity
    */
   private double computeSorensonIndex(Map<String, Integer> queryVector,
           Map<String, Integer> docVector) {
@@ -284,8 +289,10 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
   /**
    * 
    * @param queryVector
+   *          input query vector
    * @param docVector
-   * @return
+   *          input doc vector
+   * @return Jaccard similarity       
    */
   private double computeJaccardIndex(Map<String, Integer> queryVector,
           Map<String, Integer> docVector) {
@@ -315,7 +322,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
   }
 
   /**
-   * 
+   * Compute final MMR
    * @return mrr
    */
   private double compute_mrr() {
