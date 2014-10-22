@@ -1,4 +1,4 @@
-package collectionreaders;
+package edu.cmu.lti.f14.hw3.hw3_ruiw1.collectionreaders;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 
-import typesystems.Document;
+import edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document;
 
 //import typesystems.Query;
 

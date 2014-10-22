@@ -1,6 +1,6 @@
 
 /* First created by JCasGen Sun Oct 12 15:33:24 EDT 2014 */
-package typesystems;
+package edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems;
 
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Wed Oct 15 01:39:58 EDT 2014
+ * Updated by JCasGen Wed Oct 22 01:54:11 EDT 2014
  * @generated */
 public class Document_Type extends Annotation_Type {
   /** @generated 
@@ -44,7 +44,7 @@ public class Document_Type extends Annotation_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("typesystems.Document");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document");
  
   /** @generated */
   final Feature casFeat_relevanceValue;
@@ -56,7 +56,7 @@ public class Document_Type extends Annotation_Type {
    */ 
   public int getRelevanceValue(int addr) {
         if (featOkTst && casFeat_relevanceValue == null)
-      jcas.throwFeatMissing("relevanceValue", "typesystems.Document");
+      jcas.throwFeatMissing("relevanceValue", "edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document");
     return ll_cas.ll_getIntValue(addr, casFeatCode_relevanceValue);
   }
   /** @generated
@@ -65,7 +65,7 @@ public class Document_Type extends Annotation_Type {
    */    
   public void setRelevanceValue(int addr, int v) {
         if (featOkTst && casFeat_relevanceValue == null)
-      jcas.throwFeatMissing("relevanceValue", "typesystems.Document");
+      jcas.throwFeatMissing("relevanceValue", "edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document");
     ll_cas.ll_setIntValue(addr, casFeatCode_relevanceValue, v);}
     
   
@@ -80,7 +80,7 @@ public class Document_Type extends Annotation_Type {
    */ 
   public int getQueryID(int addr) {
         if (featOkTst && casFeat_queryID == null)
-      jcas.throwFeatMissing("queryID", "typesystems.Document");
+      jcas.throwFeatMissing("queryID", "edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document");
     return ll_cas.ll_getIntValue(addr, casFeatCode_queryID);
   }
   /** @generated
@@ -89,7 +89,7 @@ public class Document_Type extends Annotation_Type {
    */    
   public void setQueryID(int addr, int v) {
         if (featOkTst && casFeat_queryID == null)
-      jcas.throwFeatMissing("queryID", "typesystems.Document");
+      jcas.throwFeatMissing("queryID", "edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document");
     ll_cas.ll_setIntValue(addr, casFeatCode_queryID, v);}
     
   
@@ -104,7 +104,7 @@ public class Document_Type extends Annotation_Type {
    */ 
   public String getText(int addr) {
         if (featOkTst && casFeat_text == null)
-      jcas.throwFeatMissing("text", "typesystems.Document");
+      jcas.throwFeatMissing("text", "edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document");
     return ll_cas.ll_getStringValue(addr, casFeatCode_text);
   }
   /** @generated
@@ -113,7 +113,7 @@ public class Document_Type extends Annotation_Type {
    */    
   public void setText(int addr, String v) {
         if (featOkTst && casFeat_text == null)
-      jcas.throwFeatMissing("text", "typesystems.Document");
+      jcas.throwFeatMissing("text", "edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document");
     ll_cas.ll_setStringValue(addr, casFeatCode_text, v);}
     
   
@@ -128,7 +128,7 @@ public class Document_Type extends Annotation_Type {
    */ 
   public int getTokenList(int addr) {
         if (featOkTst && casFeat_tokenList == null)
-      jcas.throwFeatMissing("tokenList", "typesystems.Document");
+      jcas.throwFeatMissing("tokenList", "edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document");
     return ll_cas.ll_getRefValue(addr, casFeatCode_tokenList);
   }
   /** @generated
@@ -137,7 +137,7 @@ public class Document_Type extends Annotation_Type {
    */    
   public void setTokenList(int addr, int v) {
         if (featOkTst && casFeat_tokenList == null)
-      jcas.throwFeatMissing("tokenList", "typesystems.Document");
+      jcas.throwFeatMissing("tokenList", "edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document");
     ll_cas.ll_setRefValue(addr, casFeatCode_tokenList, v);}
     
   

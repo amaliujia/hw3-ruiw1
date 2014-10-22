@@ -6,7 +6,7 @@
   <vendor/>
   <types>
     <typeDescription>
-      <name>typesystems.Document</name>
+      <name>edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
@@ -29,12 +29,12 @@
           <name>tokenList</name>
           <description/>
           <rangeTypeName>uima.cas.FSList</rangeTypeName>
-          <elementType>typesystems.Token</elementType>
+          <elementType>edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Token</elementType>
         </featureDescription>
       </features>
     </typeDescription>
     <typeDescription>
-      <name>typesystems.Token</name>
+      <name>edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Token</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
@@ -51,9 +51,9 @@
       </features>
     </typeDescription>
   <typeDescription>
-      <name>typesystems.Query</name>
+      <name>edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Query</name>
       <description/>
-      <supertypeName>typesystems.Document</supertypeName>
+      <supertypeName>edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document</supertypeName>
       </typeDescription>
   </types>
 </typeSystemDescription>

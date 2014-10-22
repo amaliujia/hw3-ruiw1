@@ -1,6 +1,6 @@
 
 /* First created by JCasGen Sun Oct 12 16:07:38 EDT 2014 */
-package typesystems;
+package edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems;
 
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Wed Oct 15 01:39:58 EDT 2014
+ * Updated by JCasGen Wed Oct 22 01:54:11 EDT 2014
  * @generated */
 public class Query_Type extends Document_Type {
   /** @generated 
@@ -44,7 +44,7 @@ public class Query_Type extends Document_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("typesystems.Query");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Query");
  
   /** initialize variables to correspond with Cas Type and Features
 	 * @generated

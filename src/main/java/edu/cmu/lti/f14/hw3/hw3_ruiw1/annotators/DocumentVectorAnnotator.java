@@ -1,4 +1,4 @@
-package annotators;
+package edu.cmu.lti.f14.hw3.hw3_ruiw1.annotators;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,8 +25,9 @@ import org.apache.uima.jcas.cas.StringArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.util.JCasUtil;
 
-import typesystems.*;
-import utils.StanfordLemmatizer;
+import edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document;
+import edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Token;
+import edu.cmu.lti.f14.hw3.hw3_ruiw1.utils.StanfordLemmatizer;
 
 /**
  * Document annotator, in charge of tokenize query and document text, and build vector space
@@ -106,7 +107,7 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
         tempList.add(token);
       }
     }
-    doc.setTokenList(utils.Utils.fromCollectionToFSList(jcas, tempList));
+    doc.setTokenList(edu.cmu.lti.f14.hw3.hw3_ruiw1.utils.Utils.fromCollectionToFSList(jcas, tempList));
 
   }
 

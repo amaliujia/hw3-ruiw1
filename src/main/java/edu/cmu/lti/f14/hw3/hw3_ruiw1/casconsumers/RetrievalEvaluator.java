@@ -1,4 +1,4 @@
-package casconsumers;
+package edu.cmu.lti.f14.hw3.hw3_ruiw1.casconsumers;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -26,12 +26,11 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.ProcessTrace;
 
-import typesystems.Document;
-import typesystems.Token;
-import typesystems.Query;
-
-import utils.Posting;
-import utils.Utils;
+import edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document;
+import edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Query;
+import edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Token;
+import edu.cmu.lti.f14.hw3.hw3_ruiw1.utils.Posting;
+import edu.cmu.lti.f14.hw3.hw3_ruiw1.utils.Utils;
 
 public class RetrievalEvaluator extends CasConsumer_ImplBase {
 

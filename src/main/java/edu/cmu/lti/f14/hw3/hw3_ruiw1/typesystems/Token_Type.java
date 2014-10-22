@@ -1,6 +1,6 @@
 
 /* First created by JCasGen Sun Oct 12 15:33:24 EDT 2014 */
-package typesystems;
+package edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems;
 
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Wed Oct 15 01:39:59 EDT 2014
+ * Updated by JCasGen Wed Oct 22 01:54:11 EDT 2014
  * @generated */
 public class Token_Type extends Annotation_Type {
   /** @generated 
@@ -44,7 +44,7 @@ public class Token_Type extends Annotation_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("typesystems.Token");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Token");
  
   /** @generated */
   final Feature casFeat_text;
@@ -56,7 +56,7 @@ public class Token_Type extends Annotation_Type {
    */ 
   public String getText(int addr) {
         if (featOkTst && casFeat_text == null)
-      jcas.throwFeatMissing("text", "typesystems.Token");
+      jcas.throwFeatMissing("text", "edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Token");
     return ll_cas.ll_getStringValue(addr, casFeatCode_text);
   }
   /** @generated
@@ -65,7 +65,7 @@ public class Token_Type extends Annotation_Type {
    */    
   public void setText(int addr, String v) {
         if (featOkTst && casFeat_text == null)
-      jcas.throwFeatMissing("text", "typesystems.Token");
+      jcas.throwFeatMissing("text", "edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Token");
     ll_cas.ll_setStringValue(addr, casFeatCode_text, v);}
     
   
@@ -80,7 +80,7 @@ public class Token_Type extends Annotation_Type {
    */ 
   public int getFrequency(int addr) {
         if (featOkTst && casFeat_frequency == null)
-      jcas.throwFeatMissing("frequency", "typesystems.Token");
+      jcas.throwFeatMissing("frequency", "edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Token");
     return ll_cas.ll_getIntValue(addr, casFeatCode_frequency);
   }
   /** @generated
@@ -89,7 +89,7 @@ public class Token_Type extends Annotation_Type {
    */    
   public void setFrequency(int addr, int v) {
         if (featOkTst && casFeat_frequency == null)
-      jcas.throwFeatMissing("frequency", "typesystems.Token");
+      jcas.throwFeatMissing("frequency", "edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Token");
     ll_cas.ll_setIntValue(addr, casFeatCode_frequency, v);}
     
   

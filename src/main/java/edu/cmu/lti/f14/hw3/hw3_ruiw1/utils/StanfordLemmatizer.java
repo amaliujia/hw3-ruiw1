@@ -1,4 +1,4 @@
-package utils;
+package edu.cmu.lti.f14.hw3.hw3_ruiw1.utils;
 /*
  *  Copyright 2014 Carnegie Mellon University
  *

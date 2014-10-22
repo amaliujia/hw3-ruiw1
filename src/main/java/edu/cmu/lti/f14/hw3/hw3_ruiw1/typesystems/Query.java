@@ -1,7 +1,7 @@
 
 
 /* First created by JCasGen Sun Oct 12 16:07:38 EDT 2014 */
-package typesystems;
+package edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems;
 
 import org.apache.uima.jcas.JCas; 
 import org.apache.uima.jcas.JCasRegistry;
@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Wed Oct 15 01:39:58 EDT 2014
+ * Updated by JCasGen Wed Oct 22 01:54:11 EDT 2014
  * XML source: /Users/amaliujia/Documents/workspace/hw3-ruiw1/src/main/resources/descriptors/typesystems/VectorSpaceTypes.xml
  * @generated */
 public class Query extends Document {

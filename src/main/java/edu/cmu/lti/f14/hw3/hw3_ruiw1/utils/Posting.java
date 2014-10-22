@@ -1,9 +1,9 @@
-package utils;
+package edu.cmu.lti.f14.hw3.hw3_ruiw1.utils;
 
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import typesystems.Document;
+import edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document;
 
 /**
  * Use to save and sort final results

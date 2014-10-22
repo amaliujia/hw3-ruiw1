@@ -1,3 +1,4 @@
+package edu.cmu.lti.f14.hw3.hw3_ruiw1;
 /**
  * OBJECTIVE
  *   Implement a vector space retrieval system using a UIMA framework
