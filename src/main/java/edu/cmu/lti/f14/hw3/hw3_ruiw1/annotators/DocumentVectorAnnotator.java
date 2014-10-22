@@ -45,15 +45,16 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
    * Initialize necessary fields.
    */
   public void initialize(UimaContext aContext) {
-    stopwordsFile = (String) aContext.getConfigParameterValue("stopwords");
-    stopwords = new HashSet<String>();
+    //stopwordsFile = (String) aContext.getConfigParameterValue("stopwords");
+    
     // analyzer = new EnglishAnalyzerConfigurable (org.apache.lucene.util.Version.LUCENE_40);
     try {
-      File file = new File(stopwordsFile);
-      Scanner scanner = new Scanner(file);
-      while (scanner.hasNext()) {
-        stopwords.add(scanner.nextLine());
-      }
+      stopwords = new HashSet<String>();
+    //  File file = new File(stopwordsFile);
+      //Scanner scanner = new Scanner(file);
+      //while (scanner.hasNext()) {
+        //stopwords.add(scanner.nextLine());
+     // }
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -138,10 +139,10 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
     List<String> res = new ArrayList<String>();
     for (String s : doc.split("\\s+")) {
  
-      if(stopwords.contains(s)){
-        continue;
-      }
-      
+//      if(stopwords.contains(s)){
+//        continue;
+//      }
+//        res.add(s);
       if (Pattern.matches(".*'", s)) {
         res.add(s.substring(0, s.indexOf("'")));
       } else if (Pattern.matches(".*;", s)) {

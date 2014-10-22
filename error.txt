@@ -20,11 +20,11 @@ cosine=0.1348	rank=2	qid=13	rel=0	There are no rivers flowing into or out of Cra
 cosine=0.4226	rank=1	qid=14	rel=0	The Commodores originally came together from groups the Mystics and the Jays. 
 cosine=0.5714	rank=1	qid=15	rel=0	Oymyakon is the coldest place in Russia. 
 cosine=0.4193	rank=2	qid=15	rel=0	Prospect Creek Camp in Alaska is the coldest place in US. 
-cosine=0.4472	rank=1	qid=17	rel=0	The United States is the world's leading producer of corn 
-cosine=0.2774	rank=2	qid=17	rel=0	The U.S. state leading in production of corn received $600  million in annual tax subsidies to boost production of ethanol. 
 cosine=0.3464	rank=1	qid=16	rel=0	Bob Marley was a Jamaican reggae singer-songwriter, musician, and guitarist who did achieve international fame. 
 cosine=0.3354	rank=2	qid=16	rel=0	Without proper and timely removal of tumor one can die like Bob Marley or Steve Jobs. 
+cosine=0.4472	rank=1	qid=17	rel=0	The United States is the world's leading producer of corn 
+cosine=0.2774	rank=2	qid=17	rel=0	The U.S. state leading in production of corn received $600  million in annual tax subsidies to boost production of ethanol. 
+cosine=0.2357	rank=1	qid=18	rel=0	McDonald's Corporation is the world's largest chain of hamburger fast food restaurants. 
 cosine=0.2880	rank=1	qid=19	rel=0	The Hindenburg disaster took place as the German passenger airship LZ 129 Hindenburg caught fire and was destroyed during its attempt to dock with its mooring mast 
 cosine=0.2849	rank=2	qid=19	rel=0	Hindenburg-class airships were passenger carrying rigid airships all of which were retired shortly after a disaster in 1937 
-cosine=0.2357	rank=1	qid=18	rel=0	McDonald's Corporation is the world's largest chain of hamburger fast food restaurants. 
 cosine=0.4216	rank=1	qid=20	rel=0	Keystone Resort is the largest ski resort in Summit County located in Keystone Colorado. 

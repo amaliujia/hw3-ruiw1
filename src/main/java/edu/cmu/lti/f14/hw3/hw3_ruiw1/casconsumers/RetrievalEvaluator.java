@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
@@ -52,10 +53,6 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
   public ArrayList<Posting> cosinePostings;
 
-  public ArrayList<Posting> dicePostings;
-
-  public ArrayList<Posting> jaccardPostings;
-
   private Writer fileWriter = null;
 
   private Writer errorWriter = null;
@@ -77,8 +74,6 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
     rankMap = new HashMap<Integer, ArrayList>();
     MR = new ArrayList<Double>();
     cosinePostings = new ArrayList<Posting>();
-//    dicePostings = new ArrayList<Posting>();
-//    jaccardPostings = new ArrayList<Posting>();
     output = (String) getConfigParameterValue("report");
     errorOutput = (String) getConfigParameterValue("errorAnalysis");
     try {
@@ -143,6 +138,23 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
     super.collectionProcessComplete(arg0);
     HashMap<Integer, ArrayList<Posting>> merger = new HashMap<Integer, ArrayList<Posting>>();
+    HashMap<Integer, Integer> idMap = new HashMap<Integer, Integer>();
+    ArrayList<Integer> idUnique = new ArrayList<Integer>();
+    
+    for(int z = 0; z < this.qIdList.size(); z++){
+      if(idMap.containsKey(qIdList.get(z))){
+        continue;
+      }
+      idMap.put(qIdList.get(z), 1);
+    }
+    
+    Iterator<Integer> idIterator = idMap.keySet().iterator();
+    while (idIterator.hasNext()) {
+      int key = idIterator.next();
+      idUnique.add(key);
+    }
+    Collections.sort(idUnique);
+    
     int index;
     for (int i = 0; i < cosinePostings.size(); i++) {
       Posting a = cosinePostings.get(i);
@@ -178,8 +190,8 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
         HashMap<String, Integer> docVector = doc.tokenList;
 
          a.score = computeCosineSimilarity(queryVector, docVector);
-        // a.score = computeSorensonIndex(queryVector, docVector);
-        //a.score = computeJaccardIndex(queryVector, docVector);
+         //a.score = computeSorensonIndex(queryVector, docVector);
+         //a.score = computeJaccardIndex(queryVector, docVector);
       }
     }
 
@@ -187,8 +199,10 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
     // the real wrok is to sort
     Iterator it = merger.keySet().iterator();
     DecimalFormat df = new DecimalFormat("0.0000");
-    while (it.hasNext()) {
-      int id = (Integer) it.next();
+//    while (it.hasNext()) {
+//      int id = (Integer) it.next();
+    for(int f = 0; f < idUnique.size(); f++){
+      int id = idUnique.get(f);
       ArrayList<Posting> rankList = merger.get(id);
       Collections.sort(rankList);
       for (int j = 0; j < rankList.size(); j++) {
@@ -303,20 +317,23 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
     while (it.hasNext()) {
       String key = it.next();
       if (docVector.containsKey(key)) {
-        jaccardIndex += (queryVector.get(key) * docVector.get(key));
+        jaccardIndex += 1; //(queryVector.get(key) * docVector.get(key));
         // System.out.println(key + "  " + queryVector.get(key) + "   " + docVector.get(key));
       }
-      queryLength += (Math.pow(queryVector.get(key), 2));
+      queryLength += 1 ;//(Math.pow(queryVector.get(key), 2));
     }
 
     it = docVector.keySet().iterator();
     while (it.hasNext()) {
       String key = it.next();
-      docLength += (Math.pow(docVector.get(key), 2));
+      if(!docVector.containsKey(key)){
+        queryLength++;
+      }
+      //docLength += (Math.pow(docVector.get(key), 2));
     }
 
-    jaccardIndex = jaccardIndex / (queryLength + docLength - jaccardIndex);
-
+    //jaccardIndex = jaccardIndex / (queryLength + docLength - jaccardIndex);
+    jaccardIndex = jaccardIndex / queryLength;
     return jaccardIndex;
   }
 
