@@ -190,8 +190,6 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
         HashMap<String, Integer> docVector = doc.tokenList;
 
          a.score = computeCosineSimilarity(queryVector, docVector);
-         //a.score = computeSorensonIndex(queryVector, docVector);
-         //a.score = computeJaccardIndex(queryVector, docVector);
       }
     }
 

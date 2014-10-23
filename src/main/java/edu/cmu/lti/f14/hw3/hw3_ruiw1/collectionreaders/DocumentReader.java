@@ -12,6 +12,11 @@ import edu.cmu.lti.f14.hw3.hw3_ruiw1.typesystems.Document;
 
 //import typesystems.Query;
 
+/**
+ *  This is document reader
+ * @author amaliujia
+ *
+ */
 public class DocumentReader extends JCasAnnotator_ImplBase {
 
   /**
